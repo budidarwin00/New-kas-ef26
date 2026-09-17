@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id"><head><style>
+@font-face {
+  font-family: "Optimistic";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("/fonts/OptimisticAI_VF_Optimized.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Optimistic Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/OptimisticMono_W_TextRegular.woff2") format("woff2");
+}
+:where(html) {
+  font-family: "Optimistic", system-ui, sans-serif;
+}
+:where(code, pre, kbd, samp) {
+  font-family: "Optimistic Mono", ui-monospace, monospace;
+}
+</style><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KAS EF - Anggota</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--b:#111;--g:#f7f7f6;--l:#ececea;--m:#9a9a99}
+*{box-sizing:border-box} body{font-family:'Inter',system-ui,sans-serif;margin:0;background:#fff;color:var(--b);max-width:480px;margin:auto;-webkit-font-smoothing:antialiased}
+header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--l);padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:900;letter-spacing:-.03em;font-size:14px}
+.live{display:flex;align-items:center;gap:6px;font-size:10px;color:var(--m);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.dot{width:6px;height:6px;border-radius:50%;background:#111}
+.wrap{padding:18px}
+.saldo-sec{padding:8px 0 4px}
+.saldo-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--m);font-weight:600}
+.saldo-value{font-size:44px;font-weight:900;letter-spacing:-.05em;margin-top:6px;line-height:1}
+.saldo-meta{font-size:11px;color:var(--m);margin-top:8px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0 16px}
+.mini{border:1px solid var(--l);border-radius:14px;padding:12px 14px;background:var(--g)}
+.mini-label{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--m);font-weight:600}
+.mini-val{font-size:15px;font-weight:800;margin-top:4px}
+/* REKENING MINIMALIS DI BAWAH HEADER */
+.rek-wrap{margin:0 0 22px;padding:12px 14px;border:1px solid var(--b);border-radius:14px;background:#111;color:#fff;display:flex;flex-direction:column;gap:10px}
+.rek-label{font-size:9px;letter-spacing:.12em;text-transform:uppercase;opacity:.6;font-weight:600}
+.rek-row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.rek-bank{font-size:10px;font-weight:700;letter-spacing:.06em;opacity:.7}
+.rek-num{font-family:ui-monospace,monospace;font-size:15px;font-weight:800;letter-spacing:.02em;margin-top:2px}
+.rek-copy{border:1px solid #fff;background:#fff;color:#111;border-radius:999px;padding:6px 12px;font-size:10px;font-weight:800;cursor:pointer}
+.rek-divider{height:1px;background:rgba(255,255,255,.15);margin:2px 0}
+.block{margin:26px 0}
+.block-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.block-title{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.block-count{font-size:11px;color:var(--m)}
+.row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--l)}
+.row:last-child{border:0}
+.name{font-size:13px;font-weight:600}
+.meta{font-size:11px;color:var(--m);margin-top:2px}
+.amt{font-size:13px;font-weight:800}
+.chip{display:inline-flex;font-size:8px;padding:3px 7px;border-radius:999px;border:1px solid var(--l);background:var(--g);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-left:6px}
+.btn-sync{border:1px solid var(--l);background:#fff;border-radius:999px;padding:7px 12px;font-size:11px;font-weight:600;cursor:pointer}
+.empty{padding:22px 0;text-align:center;color:var(--m);font-size:12px;border:1px dashed var(--l);border-radius:12px}
+/* ANGGOTA MINIMALIS */
+.anggota-list{display:flex;flex-direction:column}
+.anggota-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--l)}
+.anggota-row:last-child{border:0}
+.anggota-name{font-size:13px;font-weight:600;letter-spacing:-.01em}
+.anggota-meta{font-size:10px;color:var(--m);margin-top:2px}
+.anggota-total{font-size:12px;font-weight:800}
+.anggota-row.min{margin:0 -8px;padding:11px 8px;border-radius:10px;background:#FFF1F2;border:1px solid #fecdd3;border-bottom:1px solid #fecdd3}
+.anggota-row.min .anggota-name{color:#be123c}
+.anggota-row.min .anggota-total{color:#be123c}
+.badge-min{font-size:7px;font-weight:800;letter-spacing:.08em;background:#be123c;color:#fff;padding:2px 6px;border-radius:999px;margin-left:6px;text-transform:uppercase}
+.anggota-row.max{margin:0 -8px;padding:11px 8px;border-radius:10px;background:#F0FDF4;border:1px solid #bbf7d0;border-bottom:1px solid #bbf7d0}
+footer{margin-top:32px;padding:18px 0;border-top:1px solid var(--l);font-size:10px;color:var(--m);letter-spacing:.04em;text-align:center}
+</style></head><body>
+<header>
+<div class="logo">KAS EF • PT. ASTRA KOMPONEN</div>
+<div style="display:flex;gap:6px;align-items:center"><div class="live"><span class="dot"></span> <span id="live-text">Live</span></div><button class="btn-sync" onclick="sync()">Sync</button><button class="btn-sync" onclick="exportPDF()" style="background:#111;color:#fff;border-color:#111">PDF</button></div>
+</header>
+
+<!-- PDF MODAL -->
+<div id="pdf-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99;align-items:center;justify-content:center;padding:18px"><div style="background:#fff;border-radius:16px;padding:18px;max-width:400px;width:100%"><div style="font-weight:900;font-size:13px">Export PDF</div><div id="pdf-info" style="font-size:11px;color:#666;margin:6px 0 12px">Siap export</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><button onclick="doPrintPdf()" style="padding:12px;border-radius:999px;border:1px solid #111;background:#111;color:#fff;font-weight:800;font-size:11px">🖨️ Print</button><button onclick="doDownloadPdf()" style="padding:12px;border-radius:999px;border:1px solid #e5e7eb;background:#fff;font-weight:800;font-size:11px">⬇️ Download</button></div><button onclick="closePdf()" style="margin-top:10px;width:100%;padding:10px;border:0;background:#f5f5f4;border-radius:999px;font-size:11px;font-weight:600">Tutup</button></div></div>
+<div class="wrap">
+<div class="saldo-sec">
+<div class="saldo-label">Saldo Real-Time • <span id="count">17 anggota</span></div>
+<div class="saldo-value" id="saldo">Rp 0</div>
+<div class="saldo-meta" id="syncinfo">Sync: -</div>
+</div>
+<div class="grid2">
+<div class="mini"><div class="mini-label">Masuk</div><div class="mini-val" id="masuk">+ Rp 0</div></div>
+<div class="mini"><div class="mini-label">Keluar</div><div class="mini-val" id="keluar">- Rp 0</div></div>
+</div>
+
+<!-- REKENING PINDAH DI BAWAH HEADER - MINIMALIS -->
+<div class="rek-wrap" id="rek-wrap">
+<div class="rek-label">Rekening Kas • Transfer Iuran</div>
+<div id="rlist-min"></div>
+</div>
+
+<!-- ANGGOTA LANGSUNG DI BAWAH REKENING - MINIMALIS -->
+<div class="block" style="margin-top:18px">
+<div class="block-head"><div class="block-title">Anggota • Iuran</div><div class="block-count" id="acount">17</div></div>
+<div id="alist" class="anggota-list"></div>
+</div>
+
+<!-- TRANSAKSI -->
+<div class="block">
+<div class="block-head"><div class="block-title">Transaksi</div><div class="block-count" id="txc">0 trx</div></div>
+<div id="txlist"><div class="empty">Belum ada transaksi — Saldo Rp 0</div></div>
+</div>
+
+<footer>PT. ASTRA KOMPONEN INDONESIA • KAS EF • VIEW ONLY • 1 HALAMAN</footer>
+</div>
+
+<script>
+const SCRIPT_URL="https://script.google.com/macros/s/AKfycbwZyzfPgJiNbBsxwKAfFxnRq2Iz50g9XYvkXU9CJdfywd9bc9n5bGpv7sXyKSOE3Ux72A/exec";
+function fmt(n){return new Intl.NumberFormat('id-ID').format(n||0);}
+function sync(){
+ document.getElementById('syncinfo').textContent='Syncing...';
+ document.getElementById('live-text').textContent='Syncing';
+ fetch(SCRIPT_URL+"?action=getData&t="+Date.now()).then(r=>r.json()).then(d=>{
+   let list=d.transaksi||[];
+   let txs=list.map(x=>{
+     let katFull=String(x.Kategori||"Iuran"); let parts=katFull.split("|"); let kat=parts[0].trim();
+     return {id:x.ID, date:String(x.Tanggal||"").slice(0,10), cat:kat, amt:parseInt(String(x.Nominal||"").replace(/[^0-9]/g,""))||0, name:String(x.Anggota||""), desc:parts.slice(1).join("|").trim()}
+   });
+   let masuk=0,keluar=0; txs.forEach(t=>{ if(t.cat==="Kas Keluar") keluar+=t.amt; else masuk+=t.amt; });
+   document.getElementById('saldo').textContent='Rp '+fmt(masuk-keluar);
+   document.getElementById('masuk').textContent='+ Rp '+fmt(masuk);
+   document.getElementById('keluar').textContent='- Rp '+fmt(keluar);
+   document.getElementById('syncinfo').textContent='Sync '+new Date().toLocaleTimeString('id-ID')+' • '+txs.length+' trx';
+   document.getElementById('live-text').textContent='Live • '+txs.length;
+   document.getElementById('txc').textContent=txs.length+' trx';
+   let tl=document.getElementById('txlist');
+   if(!txs.length) tl.innerHTML='<div class="empty">Belum ada transaksi<br><span style="font-size:10px">Saldo Rp 0</span></div>';
+   else tl.innerHTML=txs.slice(0,50).map(t=>'<div class="row"><div><div class="name">'+t.name+'<span class="chip">'+t.cat+'</span></div><div class="meta">'+t.date+(t.desc?' • '+t.desc:'')+'</div></div><div class="amt" style="color:'+(t.cat==='Kas Keluar'?'#c00':'#111')+'">Rp '+fmt(t.amt)+'</div></div>').join('');
+   let raw=d.anggota||[]; let members=raw.map(r=>({name:String(r.Nama||r.ID||"").trim()})).filter(x=>x.name && x.name.toLowerCase()!=='aktif');
+   if(!members.length) members=[{name:"Efrizon"},{name:"Kawir"},{name:"Kamal"},{name:"Edy"},{name:"Heri"},{name:"Toni"},{name:"Dayat"},{name:"Aldi"},{name:"Eka Iswanto"},{name:"Ardi"},{name:"Ujang"},{name:"Adhie"},{name:"Alvian"},{name:"Eko"},{name:"Pai"},{name:"Budi"},{name:"Sugiono"}];
+   // hitung total per anggota
+   let map={}; members.forEach(m=>map[m.name]={total:0,count:0});
+   txs.forEach(t=>{ if(map[t.name]!==undefined && t.cat!=="Kas Keluar"){ map[t.name].total+=t.amt; map[t.name].count++; } });
+   let arr=members.map(m=>({name:m.name, total:map[m.name]?map[m.name].total:0, count:map[m.name]?map[m.name].count:0}));
+   let minTotal=arr.length?Math.min(...arr.map(x=>x.total)):0;
+   let maxTotal=arr.length?Math.max(...arr.map(x=>x.total)):0;
+   // sort: terkecil dulu biar kelihatan
+   arr.sort((a,b)=>a.total-b.total);
+   document.getElementById('count').textContent=members.length+' anggota';
+   document.getElementById('acount').textContent=members.length;
+   document.getElementById('alist').innerHTML=arr.map(m=>{
+     let isMin=m.total===minTotal;
+     let isMax=m.total===maxTotal && maxTotal>minTotal;
+     let cls=isMin?'anggota-row min':isMax?'anggota-row max':'anggota-row';
+     let badge=isMin?'<span class="badge-min">TERKECIL</span>':isMax?'<span class="badge-min" style="background:#16a34a">TERTINGGI</span>':'';
+     return '<div class="'+cls+'"><div><div class="anggota-name">'+m.name+' '+badge+'</div><div class="anggota-meta">'+m.count+'x iuran</div></div><div class="anggota-total">Rp '+fmt(m.total)+'</div></div>';
+   }).join('');
+   let rb=d.bank||[]; let banks=rb.map(r=>({name:r.Bank||r.NamaBank||"Bank", number:r.NoRek||r.Rekening||"", owner:r.Pemilik||"Eka Iswanto"})).filter(b=>b.number);
+   if(banks.length===0) banks=[{name:"BCA", number:"6830747280", owner:"Eka Iswanto"},{name:"MANDIRI", number:"1570005764080", owner:"Eka Iswanto"}];
+   document.getElementById('rlist-min').innerHTML=banks.map((b,i)=>'<div class="rek-row"><div><div class="rek-bank">'+b.name+' • '+b.owner+'</div><div class="rek-num">'+b.number+'</div></div><button class="rek-copy" onclick="navigator.clipboard.writeText(\''+b.number+'\');this.textContent=\'✓ Copied\';setTimeout(()=>this.textContent=\'Copy\',1200)">Copy</button></div>'+(i<banks.length-1?'<div class="rek-divider"></div>':'')).join('');
+   window._lastBanks=banks; window._lastArr=arr; window._lastTxs=txs;
+ }).catch(e=>{document.getElementById('syncinfo').textContent='Offline'; document.getElementById('live-text').textContent='Offline';});
+}
+function buildPdf(){
+  let txs=window._lastTxs||[]; let arr=window._lastArr||[];
+  let masuk=0,keluar=0; txs.forEach(t=>{ if(t.cat==="Kas Keluar") keluar+=t.amt; else masuk+=t.amt; });
+  let html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>KAS EF</title><style>body{font-family:Inter,Arial,sans-serif;padding:20px;color:#111} h1{font-size:18px} table{width:100%;border-collapse:collapse;margin-top:14px} th,td{border:1px solid #ddd;padding:8px;font-size:11px;text-align:left} th{background:#111;color:#fff} .right{text-align:right} .min{color:#be123c;font-weight:800}</style></head><body>';
+  html+='<h1>KAS EF - PT Astra Komponen Indonesia</h1><div>Saldo: Rp '+fmt(masuk-keluar)+' | Masuk: Rp '+fmt(masuk)+' | Keluar: Rp '+fmt(keluar)+' | '+new Date().toLocaleDateString('id-ID')+'</div>';
+  html+='<h3 style="margin-top:18px">Anggota - Iuran (Terkecil Beda Warna)</h3><table><tr><th>Nama</th><th>Jumlah</th><th>Total</th></tr>';
+  arr.forEach(m=>{ html+='<tr'+(m.total===Math.min(...arr.map(x=>x.total))?' class="min"':'')+'><td>'+m.name+'</td><td>'+m.count+'x</td><td class="right">Rp '+fmt(m.total)+'</td></tr>'; });
+  html+='</table>';
+  html+='<h3 style="margin-top:18px">Transaksi - '+txs.length+'</h3><table><tr><th>No</th><th>Tanggal</th><th>Nama</th><th>Kategori</th><th>Nominal</th></tr>';
+  txs.forEach((t,i)=>{ html+='<tr><td>'+(i+1)+'</td><td>'+t.date+'</td><td>'+t.name+'</td><td>'+t.cat+(t.desc?' | '+t.desc:'')+'</td><td class="right">Rp '+fmt(t.amt)+'</td></tr>'; });
+  html+='</table><br><button onclick="window.print()" style="padding:12px 20px;background:#111;color:#fff;border:0;border-radius:8px">Print / Save PDF</button></body></html>';
+  return html;
+}
+let lastUrl=null;
+function exportPDF(){
+  let html=buildPdf();
+  let blob=new Blob([html],{type:'text/html'});
+  if(lastUrl) URL.revokeObjectURL(lastUrl);
+  lastUrl=URL.createObjectURL(blob);
+  document.getElementById('pdf-info').textContent=(window._lastTxs||[]).length+' transaksi • '+(window._lastArr||[]).length+' anggota';
+  document.getElementById('pdf-modal').style.display='flex';
+}
+function closePdf(){ document.getElementById('pdf-modal').style.display='none'; }
+function doDownloadPdf(){ if(!lastUrl) return; let a=document.createElement('a'); a.href=lastUrl; a.download='KAS-EF-'+new Date().toISOString().slice(0,10)+'.html'; a.click(); }
+function doPrintPdf(){ if(!lastUrl) return; let w=window.open(lastUrl,'_blank'); if(w) setTimeout(()=>w.print(),500); else doDownloadPdf(); }
+setTimeout(sync,400);
+</script>
+<script>(function(){var loc=location.href.replace(/#.*$/,"");var ATTR_NAMES=["data-product-id","data-productid","data-product_id","product-id","productid","product_id","data-source-entity-id","source-entity-id","source_entity_id","data-product","data-metadata","data-meta"];var DATASET_KEYS=["productId","productid","product_id","sourceEntityId","sourceentityid","source_entity_id","product","metadata","meta"];function readProductId(value){if(typeof value!=="string"||value.length===0)return null;if(/^[0-9]{6,}$/.test(value))return value;var match=value.match(/(?:product(?:_|-)?id|source(?:_|-)?entity(?:_|-)?id)["'=:\s]+([0-9]{6,})/i);return match?match[1]:null}function extractProductId(start){for(var node=start;node&&node!==document.body;node=node.parentElement){for(var i=0;i<ATTR_NAMES.length;i++){var attrValue=node.getAttribute&&node.getAttribute(ATTR_NAMES[i]);var attrProductId=readProductId(attrValue);if(attrProductId)return attrProductId}var dataset=node.dataset||null;if(dataset){for(var j=0;j<DATASET_KEYS.length;j++){var dataValue=dataset[DATASET_KEYS[j]];var dataProductId=readProductId(dataValue);if(dataProductId)return dataProductId}}}return null}function isInlineMediaSlotElement(node){return !!(node&&node.getAttribute&&node.getAttribute("data-clippy-inline-media-slot")!==null)}function findInlineMediaSlot(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(isInlineMediaSlotElement(node))return node}return null}function readInlineMediaUrl(node){if(!node)return null;return node.getAttribute&&((node.getAttribute("data-clippy-inline-media-url")||node.getAttribute("data-url")||node.getAttribute("data_url")))||node.href||null}function stripHash(url){return String(url).replace(/#.*$/,"")}function urlsMatch(a,b){if(!a||!b)return false;try{return stripHash(new URL(a,loc).href)===stripHash(new URL(b,loc).href)}catch(_){return stripHash(a)===stripHash(b)}}function isFirstPartyReelUrl(value){try{var url=new URL(value,loc);if(url.protocol!=="https:")return false;var host=url.hostname.toLowerCase();var supported=host==="instagram.com"||host.endsWith(".instagram.com")||host==="facebook.com"||host.endsWith(".facebook.com");return supported&&/\/reels?\//i.test(url.pathname)}catch(_){return false}}function isInlineMediaUrlClick(node,href){var slot=findInlineMediaSlot(node);if(!slot)return false;var slotUrl=readInlineMediaUrl(slot);if(slotUrl)return urlsMatch(href,slotUrl);return isFirstPartyReelUrl(href)}function findDataHref(start){for(var node=start;node&&node!==document.body;node=node.parentElement){if(node.getAttribute){var href=node.getAttribute("data-href")||node.getAttribute("data-url");if(href)return{href:href,node:node}}}return null}var nativeOpen=window.open;window.open=function(url){if(parent!==window&&typeof url==="string"&&/^https?:\/\//.test(url)){parent.postMessage({type:"ecto:usercontent-link-click",href:url},"*");return null}return nativeOpen?nativeOpen.apply(window,arguments):null};document.addEventListener("click",function(e){var target=e.target instanceof Element?e.target:null;if(!target)return;if(parent===window)return;var a=target.closest?target.closest("a[href]"):null;if(a&&a.href&&/^https?:\/\//.test(a.href)&&a.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(a,a.href))return;var productId=extractProductId(target)||extractProductId(a);if(productId){e.preventDefault();parent.postMessage({type:"ecto-artifact-link-click",productId:productId},"*");return}e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:a.href},"*");return}var dataHref=findDataHref(target);if(dataHref&&/^https?:\/\//.test(dataHref.href)&&dataHref.href.replace(/#.*$/,"")!==loc){if(isInlineMediaUrlClick(dataHref.node,dataHref.href))return;e.preventDefault();parent.postMessage({type:"ecto:usercontent-link-click",href:dataHref.href},"*")}},true)})();</script><script>(function(){var FOCUS_TYPE="ecto:artifact-focus-request";var CLOSE_TYPE="ecto:artifact-close-request";function focusArtifactDocument(){var body=document.body;if(!body)return;try{window.focus();}catch(e){}if(!body.hasAttribute("tabindex"))body.setAttribute("tabindex","-1");try{body.focus({preventScroll:true});}catch(e){try{body.focus();}catch(e2){}}}window.addEventListener("message",function(event){if(event.source!==window.parent)return;var data=event.data;if(!data||typeof data!=="object"||data.type!==FOCUS_TYPE)return;if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",focusArtifactDocument,{once:true});return;}focusArtifactDocument();});window.addEventListener("keydown",function(event){if(event.key!=="Escape")return;window.setTimeout(function(){if(event.defaultPrevented)return;window.parent.postMessage({type:CLOSE_TYPE},"*");},0);});})();</script></body></html>
